@@ -10,7 +10,7 @@ export default function Update () {
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
     const [ checkbox, setCheckbox ] = useState(false)
-    const [ phone, setPhone ] = useState(false)
+    const [ phone, setPhone ] = useState('')
 
     let navigate = useNavigate()
 
