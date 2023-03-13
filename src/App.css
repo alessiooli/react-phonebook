@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.main-header {
+  font-family: 'Tilt Neon', cursive;
+}
+
+.headline {
+  font-family: 'Tilt Neon', cursive;
+}
+
+.create-form label {
+  font-family: 'Tilt Neon', cursive;
+  font-size: 12px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 0.25em;
+}
+
+.ui.button {
+  min-width: 11em;
+}
+
+.blue-text {
+  color: #4183c4 !important;
+}
