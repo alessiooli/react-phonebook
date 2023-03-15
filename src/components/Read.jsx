@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Table, Button } from 'semantic-ui-react'
-import axios from 'axios'
+import { Table, Button, Icon } from 'semantic-ui-react'
+import { APICall } from '../api'
 
 export default function Read () {
 
-    const [ APIData, setAPIData ] = useState([]) // contiene i dati dell'api 
+    const [ APIData, setAPIData ] = useState([]) // conterrà i dati dell'api 
 
     // quando l'app si carica, carica anche i dati
     useEffect(() => {
-        axios.get(`https://64073a4d77c1a905a0f23b03.mockapi.io/fakeData`) // richiesta GET
+
+        APICall.get() // richiesta GET
             .then((response) => {
                 setAPIData(response.data)
                 console.log('Dati caricati correttamente')
             })
-    }, [])
 
+    }, [])
     // console.log(APIData) // contiene i dati dell'API
 
     const setData = (data) => {
@@ -32,7 +33,7 @@ export default function Read () {
     }
 
     const onDelete = (id) => {
-        axios.delete(`https://64073a4d77c1a905a0f23b03.mockapi.io/fakeData/${id}`)
+        APICall.delete(id)
             .then(() => {
                 getData() // dopo aver eliminato i dati, ricarica i dati
             })
@@ -41,7 +42,7 @@ export default function Read () {
     }
 
     const getData = () => {
-        axios.get(`https://64073a4d77c1a905a0f23b03.mockapi.io/fakeData`)
+        APICall.get()
             .then((getData) => {
                 setAPIData(getData.data) 
             })
@@ -59,9 +60,13 @@ export default function Read () {
                         <Table.HeaderCell>Last Name</Table.HeaderCell>
                         <Table.HeaderCell>Phone</Table.HeaderCell>
                         <Table.HeaderCell>Privacy</Table.HeaderCell>
-                        <Table.HeaderCell>Update</Table.HeaderCell>
-                        <Table.HeaderCell>Delete</Table.HeaderCell>
-                        <Table.HeaderCell>Create</Table.HeaderCell>
+                        <Table.HeaderCell colSpan='2'>Actions</Table.HeaderCell>
+                        <Table.HeaderCell>
+                            <Link to="/create">
+                                <Button className='blue-text'>
+                                    Create <Icon className='plus-icon' name='plus' />
+                                </Button>
+                            </Link></Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
     
@@ -77,16 +82,15 @@ export default function Read () {
                                 <Table.Cell>{data.checkbox ? 'Checked' : 'Unchecked'}</Table.Cell>
                                 <Table.Cell>
                                     <Link to="/update">
-                                        <Button className='blue-text' onClick={() => { setData(data) }}>Update</Button>
+                                        <Button className='blue-text' onClick={() => { setData(data) }}>
+                                            Update <Icon className='plus-icon' name='pencil' />
+                                        </Button>
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <Button className='blue-text' onClick={() => { onDelete(data.id) }}>Delete</Button>
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <Link to="/create">
-                                        <Button className='blue-text'>Create one more</Button>
-                                    </Link>
+                                    <Button className='blue-text' onClick={() => { onDelete(data.id) }}>
+                                        Delete <Icon className='plus-icon' name='trash alternate' />
+                                    </Button>
                                 </Table.Cell>
                             </Table.Row>
                         )

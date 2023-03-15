@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
-import axios from 'axios'
+import { APICall } from '../api'
 
 
 export default function Update () {
@@ -10,7 +10,7 @@ export default function Update () {
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
     const [ checkbox, setCheckbox ] = useState(false)
-    const [ phone, setPhone ] = useState(false)
+    const [ phone, setPhone ] = useState('')
 
     let navigate = useNavigate()
 
@@ -26,7 +26,7 @@ export default function Update () {
 
     const updateAPIData = () => {
 
-      axios.put(`https://64073a4d77c1a905a0f23b03.mockapi.io/fakeData/${id}`, {
+      APICall.put(id, {
         firstName,
         lastName,
         checkbox,

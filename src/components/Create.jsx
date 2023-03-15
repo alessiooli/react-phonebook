@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
-import axios from 'axios'
+import { APICall } from '../api'
 
 export default function Create () {
 
@@ -14,8 +14,7 @@ let navigate = useNavigate()
 
 const postData = () => {
     
-    axios.post(
-        `https://64073a4d77c1a905a0f23b03.mockapi.io/fakeData`, /* 1° arg: endpoint dell'api */
+    APICall.post(APICall.baseURL, /* 1° arg: endpoint dell'api OBBLIGATORIO */
         { /* 2° arg: un oggetto che contiene i campi del form */
             firstName,
             lastName,
