@@ -15,15 +15,13 @@ export default function App() {
     <div className="main">
         <Image src="/telephone-call.png" size='mini' />
         <h2 className="main-header">React PhoneBook</h2>
-        <div>
           <Routes>
             <Route path='/' element={<Layout />}/>
               <Route path='/create' element={<Create />} />
               <Route path='/read' element={<Read />} />
               <Route path='/update' element={<Update />} />
           </Routes> 
-        </div>
-      </div>
+    </div>
     
 
   )

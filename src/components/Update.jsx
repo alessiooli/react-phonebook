@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Form, Icon } from 'semantic-ui-react'
 import { APICall } from '../api'
 
 
@@ -9,8 +9,9 @@ export default function Update () {
     const [ id, setID ] = useState(null)
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
-    const [ checkbox, setCheckbox ] = useState(false)
+    const [ mail, setMail ] = useState('')
     const [ phone, setPhone ] = useState('')
+    const [ address, setAddress ] = useState('')
 
     let navigate = useNavigate()
 
@@ -19,8 +20,9 @@ export default function Update () {
         setID(localStorage.getItem('ID'))
         setFirstName(localStorage.getItem('First Name'))
         setLastName(localStorage.getItem('Last Name'))
-        setCheckbox(localStorage.getItem('Checkbox Value'))
+        setMail(localStorage.getItem('Email'))
         setPhone(localStorage.getItem('Phone Number'))
+        setAddress(localStorage.getItem('Address'))
 
     }, [])
 
@@ -29,8 +31,9 @@ export default function Update () {
       APICall.put(id, {
         firstName,
         lastName,
-        checkbox,
-        phone
+        mail,
+        phone,
+        address
       })
         .then(() => {
           navigate('/read') // dopo aver caricato i dati, redireziona alla pagina read
@@ -57,10 +60,16 @@ export default function Update () {
         </Form.Field>
     
         <Form.Field>
-          <Checkbox label='I agree to the Terms and Conditions' checked={ checkbox } onChange={ (event) => setCheckbox(!checkbox) }/>
+          <label>Email</label>
+          <input type={'email'} placeholder='Email' value={ mail } onChange={ (event) => setMail(event.target.value) } />
+        </Form.Field>
+
+        <Form.Field>
+          <label>Address</label>
+          <input placeholder='Address' value={ address } onChange={ (event) => setAddress(event.target.value) } />
         </Form.Field>
     
-        <Button type='submit' onClick={ updateAPIData }>Update</Button>
+        <Button type='submit' onClick={ updateAPIData } className='blue-text'>Update<Icon className='plus-icon' name='pencil' /></Button>
     
       </Form>
     

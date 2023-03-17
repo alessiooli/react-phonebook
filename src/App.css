@@ -42,3 +42,33 @@ li {
 .icon {
   padding-left: 12px;
 }
+
+h3.roadmap-title {
+  text-align: center;
+}
+
+.roadmap-list {
+  width: 20em;
+}
+
+.roadmap-container {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.list-headline {
+  font-weight: bold;
+}
+
+.item.list-headline {
+  margin: 0.3em;
+}
+
+.pl-2 {
+  padding-left: 2em !important;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Table, Button, Icon } from 'semantic-ui-react'
+import { Table, Button, Icon, Loader } from 'semantic-ui-react'
 import { APICall } from '../api'
 
 export default function Read () {
@@ -12,6 +12,7 @@ export default function Read () {
 
         APICall.get() // richiesta GET
             .then((response) => {
+
                 setAPIData(response.data)
                 console.log('Dati caricati correttamente')
             })
@@ -21,14 +22,15 @@ export default function Read () {
 
     const setData = (data) => {
         
-        let { id, firstName, lastName, checkbox, phone } = data // destrutturiamo l'oggetto
+        let { id, firstName, lastName, mail, phone, address } = data // destrutturiamo l'oggetto
 
         // conserviamo i dati nel local storage, li salviamo nella memoria del browser
         localStorage.setItem('ID', id)
         localStorage.setItem('First Name', firstName)
         localStorage.setItem('Last Name', lastName)
-        localStorage.setItem('Checkbox Value', checkbox)
+        localStorage.setItem('Email', mail)
         localStorage.setItem('Phone Number', phone)
+        localStorage.setItem('Address', address)
         
     }
 
@@ -52,51 +54,54 @@ export default function Read () {
     if (APIData.length > 0 ) {
 
         return (
-
-            <Table celled>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>First Name</Table.HeaderCell>
-                        <Table.HeaderCell>Last Name</Table.HeaderCell>
-                        <Table.HeaderCell>Phone</Table.HeaderCell>
-                        <Table.HeaderCell>Privacy</Table.HeaderCell>
-                        <Table.HeaderCell colSpan='2'>Actions</Table.HeaderCell>
-                        <Table.HeaderCell>
-                            <Link to="/create">
-                                <Button className='blue-text'>
-                                    Create <Icon className='plus-icon' name='plus' />
-                                </Button>
-                            </Link></Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-    
-                <Table.Body>
-                    {APIData.map((data) => {
-    
-                        return (
-    
-                            <Table.Row>
-                                <Table.Cell>{data.firstName}</Table.Cell>
-                                <Table.Cell>{data.lastName}</Table.Cell>
-                                <Table.Cell>{data.phone}</Table.Cell>
-                                <Table.Cell>{data.checkbox ? 'Checked' : 'Unchecked'}</Table.Cell>
-                                <Table.Cell>
-                                    <Link to="/update">
-                                        <Button className='blue-text' onClick={() => { setData(data) }}>
-                                            Update <Icon className='plus-icon' name='pencil' />
-                                        </Button>
-                                    </Link>
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <Button className='blue-text' onClick={() => { onDelete(data.id) }}>
-                                        Delete <Icon className='plus-icon' name='trash alternate' />
+            <div className='table-container'>
+                <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>First Name</Table.HeaderCell>
+                            <Table.HeaderCell>Last Name</Table.HeaderCell>
+                            <Table.HeaderCell>Phone</Table.HeaderCell>
+                            <Table.HeaderCell>Mail</Table.HeaderCell>
+                            <Table.HeaderCell>Address</Table.HeaderCell>
+                            <Table.HeaderCell colSpan='2'>Actions</Table.HeaderCell>
+                            <Table.HeaderCell>
+                                <Link to="/create">
+                                    <Button className='blue-text'>
+                                        Create <Icon className='plus-icon' name='plus' />
                                     </Button>
-                                </Table.Cell>
-                            </Table.Row>
-                        )
-                    })}
-                </Table.Body>
-            </Table>
+                                </Link></Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+        
+                    <Table.Body>
+                        {APIData.map((data) => {
+        
+                            return (
+        
+                                <Table.Row>
+                                    <Table.Cell>{data.firstName}</Table.Cell>
+                                    <Table.Cell>{data.lastName}</Table.Cell>
+                                    <Table.Cell>{data.phone}</Table.Cell>
+                                    <Table.Cell>{data.mail}</Table.Cell>
+                                    <Table.Cell>{data.address}</Table.Cell>
+                                    <Table.Cell>
+                                        <Link to="/update">
+                                            <Button className='blue-text' onClick={() => { setData(data) }}>
+                                                Update <Icon className='plus-icon' name='pencil' />
+                                            </Button>
+                                        </Link>
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <Button className='blue-text' onClick={() => { onDelete(data.id) }}>
+                                            Delete <Icon className='plus-icon' name='trash alternate' />
+                                        </Button>
+                                    </Table.Cell>
+                                </Table.Row>
+                            )
+                        })}
+                    </Table.Body>
+                </Table>
+            </div>
         )
 
     } else {

@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { APICall } from '../api'
 
 export default function Create () {
 
 const [ firstName, setFirstName ] = useState('')
 const [ lastName, setLastName ] = useState('')
-const [ checkbox, setCheckbox ] = useState(false)
+const [ mail, setMail ] = useState('')
 const [ phone, setPhone ] = useState('')
+const [ address, setAddress ] = useState('')
 
 let navigate = useNavigate()
 
@@ -18,8 +19,9 @@ const postData = () => {
         { /* 2° arg: un oggetto che contiene i campi del form */
             firstName,
             lastName,
-            checkbox,
-            phone
+            mail,
+            phone,
+            address
         })
           .then(() => {
           navigate('/read') // dopo che i dati sono stati inseriti, redireziona alla pagina navigate
@@ -48,7 +50,13 @@ return (
     </Form.Field>
 
     <Form.Field>
-      <Checkbox label='I agree to the Terms and Conditions' onChange={ (event) => setCheckbox(!checkbox) }/>
+      <label>Email</label>
+      <input type={'email'} placeholder='Email' onChange={ (event) => setMail(event.target.value) } />
+    </Form.Field>
+
+    <Form.Field>
+      <label>Address</label>
+      <input placeholder='Address' onChange={ (event) => setAddress(event.target.value) } />
     </Form.Field>
 
     <Button type='submit' className='blue-text' onClick={ postData }>Submit</Button>
