@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button, Form } from 'semantic-ui-react'
+import { useNavigate, Link } from 'react-router-dom'
+import { Button, Form, Icon } from 'semantic-ui-react'
 import { APICall } from '../api'
 
 export default function Create () {
@@ -15,8 +15,8 @@ let navigate = useNavigate()
 
 const postData = () => {
     
-    APICall.post(APICall.baseURL, /* 1° arg: endpoint dell'api OBBLIGATORIO */
-        { /* 2° arg: un oggetto che contiene i campi del form */
+    APICall.post(APICall.baseURL, /* 1° arg: API endpoint MANDATORY */
+        { /* 2° arg: object containing form fields */
             firstName,
             lastName,
             mail,
@@ -24,7 +24,7 @@ const postData = () => {
             address
         })
           .then(() => {
-          navigate('/read') // dopo che i dati sono stati inseriti, redireziona alla pagina navigate
+          navigate('/read') // after data has been inserted redirect to navigate page
         })
 
         console.log('Dati inseriti.')
@@ -33,36 +33,55 @@ const postData = () => {
 
 return (
 
-  <Form className='create-form'>
-    <Form.Field>
-      <label>First Name</label>
-      <input placeholder='First Name' onChange={ (event) => setFirstName(event.target.value) }/> { /* l'oggetto event che passiamo alla funzione contiene tutte le informazioni riguardo l'evento di input, event.target restituisce l'elemento che ha triggerato l'evento, event.target.value restituisce il valore di quell'elemento */ }
-    </Form.Field>
+  <>
+    <div className="flex-menu-container">
+      <div className='read-button-container'>
+        <Link to="/read">
+          <Button className='blue-text'>
+            Read <Icon className='eye-icon' name='eye' />
+          </Button>
+        </Link>
+      </div>
 
-    <Form.Field>
-      <label>Last Name</label>
-      <input placeholder='Last Name' onChange={ (event) => setLastName(event.target.value) } />
-    </Form.Field>
+      <div className='homepage-button-container'>
+        <Link to="/">
+          <Button className='blue-text'>
+            Home <Icon className='arrow-icon' name='arrow left' />
+          </Button>
+        </Link>
+      </div>
+    </div>
 
-    <Form.Field>
-      <label>Phone Number</label>
-      <input type={'tel'} placeholder='Phone Number' onChange={ (event) => setPhone(event.target.value) } />
-    </Form.Field>
+    <Form className='create-form'>
+      <Form.Field required>
+        <label>First Name</label>
+        <input placeholder='First Name' required onChange={ (event) => setFirstName(event.target.value) }/> { /* l'oggetto event che passiamo alla funzione contiene tutte le informazioni riguardo l'evento di input, event.target restituisce l'elemento che ha triggerato l'evento, event.target.value restituisce il valore di quell'elemento */ }
+      </Form.Field>
 
-    <Form.Field>
-      <label>Email</label>
-      <input type={'email'} placeholder='Email' onChange={ (event) => setMail(event.target.value) } />
-    </Form.Field>
+      <Form.Field required>
+        <label>Last Name</label>
+        <input placeholder='Last Name' required onChange={ (event) => setLastName(event.target.value) } />
+      </Form.Field>
 
-    <Form.Field>
-      <label>Address</label>
-      <input placeholder='Address' onChange={ (event) => setAddress(event.target.value) } />
-    </Form.Field>
+      <Form.Field required>
+        <label>Phone Number</label>
+        <input type={'tel'} placeholder='Phone Number' required onChange={ (event) => setPhone(event.target.value) } />
+      </Form.Field>
 
-    <Button type='submit' className='blue-text' onClick={ postData }>Submit</Button>
+      <Form.Field required>
+        <label>Email</label>
+        <input type={'email'} placeholder='Email' required onChange={ (event) => setMail(event.target.value) } />
+      </Form.Field>
 
-  </Form>
+      <Form.Field>
+        <label>Address</label>
+        <input placeholder='Address' onChange={ (event) => setAddress(event.target.value) } />
+      </Form.Field>
 
+      <Button type='submit' className='blue-text' onClick={ postData }>Submit</Button>
+
+    </Form>
+  </>
   )
 
 }

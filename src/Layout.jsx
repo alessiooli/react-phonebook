@@ -22,9 +22,9 @@ export default function Layout() {
                 </Link>
               </li>
               <li>
-                <Link to="/update">
+                {/* <Link to="/update">
                   <Button className='blue-text'>Update contacts</Button>
-                </Link>
+                </Link> */}
               </li>
             </ul>
           </nav>

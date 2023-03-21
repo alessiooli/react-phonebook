@@ -1,4 +1,4 @@
-import { Icon, List, ListHeader } from 'semantic-ui-react'
+import {  List } from 'semantic-ui-react'
 
 const Roadmap = () => (
 
@@ -37,19 +37,7 @@ const Roadmap = () => (
     </List.Item>
     <List.Item className='pl-2'>
         <List.Icon name='edit' color='blue' />
-        <List.Content>Separate Front-End and Back-end logic</List.Content>
-    </List.Item>
-    <List.Item className='pl-2'>
-        <List.Icon name='edit' color='blue' />
-        <List.Content>Add Photo field</List.Content>
-    </List.Item>
-    <List.Item className='pl-2'>
-        <List.Icon name='edit' color='blue' />
         <List.Content>Add Search feature on tables</List.Content>
-    </List.Item>
-    <List.Item className='pl-2'>
-        <List.Icon name='edit' color='blue' />
-        <List.Content>Loading animation during API Call</List.Content>
     </List.Item>
     <List.Item className='pl-2'>
         <List.Icon name='edit' color='blue' />

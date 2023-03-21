@@ -7,8 +7,6 @@ import Layout from './Layout'
 import { Image } from 'semantic-ui-react'
 
 export default function App() {
-  
-
   return (
 
     

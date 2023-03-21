@@ -52,7 +52,7 @@ h3.roadmap-title {
 }
 
 .roadmap-container {
-  padding-top: 5em;
+  padding-top: 3em;
   padding-bottom: 5em;
 }
 
@@ -72,3 +72,16 @@ h3.roadmap-title {
   text-decoration: line-through;
 }
 
+.create-button-container {
+  padding-left: 1em;
+  padding-top: 0.5em;
+}
+
+.table-container {
+  display: flex;
+}
+
+.flex-menu-container {
+  display: flex;
+  padding-bottom: 2em;
+}
