@@ -1,6 +1,14 @@
 # React Phonebook Application
 
-A React Phonebook application using Mockapi.io, Semantic UI React 
+A React Phonebook application where you can perform real time CRUD operations on API.
+
+## Link
+
+Link: [React Phonebook](https://react-phonebook.vercel.app/)
+
+## Screenshot
+
+!['Screenshot'](./screenshot.png)
 
 ### Built with
 
@@ -8,7 +16,6 @@ A React Phonebook application using Mockapi.io, Semantic UI React
 - Mockapi.io
 - Semantic UI React
 - Axios
-
 
 ## Developer
 
