@@ -1,24 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
 
 .main {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  padding-top: 2em;
 }
 
 .main-header {
-  font-family: 'Tilt Neon', cursive;
+  font-family: "Tilt Neon", cursive;
 }
 
 .headline {
-  font-family: 'Tilt Neon', cursive;
+  font-family: "Tilt Neon", cursive;
 }
 
 .create-form label {
-  font-family: 'Tilt Neon', cursive;
+  font-family: "Tilt Neon", cursive;
   font-size: 12px;
 }
 
@@ -73,15 +73,38 @@ h3.roadmap-title {
 }
 
 .create-button-container {
-  padding-left: 1em;
-  padding-top: 0.5em;
+  /* padding-left: 1em;
+  padding-top: 0.5em; */
 }
 
 .table-container {
   display: flex;
+  padding-top: 2em;
 }
 
 .flex-menu-container {
   display: flex;
   padding-bottom: 2em;
+}
+
+@media screen and (max-width: 450px) {
+  .flex-menu-container {
+    flex-direction: column;
+    /* padding-top: 35em; */
+  }
+
+  /* .main-header {
+    padding-top: 24em;
+  } */
+
+  .homepage-button-container,
+  .create-button-container {
+    padding: 0.5em 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    width: 70%;
+  }
 }
