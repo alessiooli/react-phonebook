@@ -8,11 +8,10 @@ export default function Read() {
 
   // load apidata after first rendering
   useEffect(() => {
-    APICall.get() // richiesta GET
-      .then((response) => {
-        setAPIData(response.data);
-        console.log("Data loaded correctly");
-      });
+    APICall.get().then((response) => {
+      setAPIData(response.data);
+      console.log("Data loaded correctly");
+    });
   }, []);
 
   const setData = (data) => {
@@ -45,25 +44,25 @@ export default function Read() {
   if (APIData.length > 0) {
     return (
       <>
-        <div className="flex-menu-container">
-          <div className="homepage-button-container">
-            <Link to="/">
-              <Button className="blue-text">
-                Home <Icon className="arrow-icon" name="arrow left" />
+        <div className='flex-menu-container'>
+          <div className='homepage-button-container'>
+            <Link to='/'>
+              <Button className='blue-text'>
+                Home <Icon className='arrow-icon' name='arrow left' />
               </Button>
             </Link>
           </div>
 
-          <div className="create-button-container">
-            <Link to="/create">
-              <Button className="blue-text">
-                Create <Icon className="plus-icon" name="plus" />
+          <div className='create-button-container'>
+            <Link to='/create'>
+              <Button className='blue-text'>
+                Create <Icon className='plus-icon' name='plus' />
               </Button>
             </Link>
           </div>
         </div>
 
-        <div className="table-container">
+        <div className='table-container'>
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -72,7 +71,7 @@ export default function Read() {
                 <Table.HeaderCell>Phone</Table.HeaderCell>
                 <Table.HeaderCell>Mail</Table.HeaderCell>
                 <Table.HeaderCell>Address</Table.HeaderCell>
-                <Table.HeaderCell colSpan="2">Actions</Table.HeaderCell>
+                <Table.HeaderCell colSpan='2'>Actions</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
@@ -86,26 +85,26 @@ export default function Read() {
                     <Table.Cell>{data.mail}</Table.Cell>
                     <Table.Cell>{data.address}</Table.Cell>
                     <Table.Cell>
-                      <Link to="/update">
+                      <Link to='/update'>
                         <Button
-                          className="blue-text"
+                          className='blue-text'
                           onClick={() => {
                             setData(data);
                           }}
                         >
-                          Update <Icon className="plus-icon" name="pencil" />
+                          Update <Icon className='plus-icon' name='pencil' />
                         </Button>
                       </Link>
                     </Table.Cell>
                     <Table.Cell>
                       <Button
-                        className="blue-text"
+                        className='blue-text'
                         onClick={() => {
                           onDelete(data.id);
                         }}
                       >
                         Delete{" "}
-                        <Icon className="plus-icon" name="trash alternate" />
+                        <Icon className='plus-icon' name='trash alternate' />
                       </Button>
                     </Table.Cell>
                   </Table.Row>
@@ -120,8 +119,8 @@ export default function Read() {
     return (
       <div>
         No records in database.{" "}
-        <Link to="/create">
-          <Button className="blue-text">Create Records</Button>
+        <Link to='/create'>
+          <Button className='blue-text'>Create Records</Button>
         </Link>
       </div>
     );

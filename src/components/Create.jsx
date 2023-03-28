@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Icon } from "semantic-ui-react";
 import { APICall } from "../api";
@@ -10,6 +11,14 @@ export default function Create() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
+  // from React Hook form | needed to validate the form
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  // routes
   let navigate = useNavigate();
 
   const postData = () => {
@@ -23,7 +32,7 @@ export default function Create() {
       navigate("/read"); // after data has been inserted redirect to navigate page
     });
 
-    console.log("Dati inseriti.");
+    console.log("Data inserted.");
   };
 
   return (
@@ -52,9 +61,20 @@ export default function Create() {
           <input
             placeholder='First Name'
             required
-            onChange={(event) => setFirstName(event.target.value)}
-          />{" "}
-          {/* l'oggetto event che passiamo alla funzione contiene tutte le informazioni riguardo l'evento di input, event.target restituisce l'elemento che ha triggerato l'evento, event.target.value restituisce il valore di quell'elemento */}
+            type={"text"}
+            {...register("firstName", {
+              onChange: (event) => setFirstName(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/,
+                message: "invalid First Name",
+              },
+            })}
+          />
+          <div className='error-message'>
+            {errors.firstName && errors.firstName.message}
+          </div>
+          {/* the event object we pass to the function contains all the information about the input event, event.target returns the element that triggered the event, event.target.value returns the value of that element */}
         </Form.Field>
 
         <Form.Field required>
@@ -62,8 +82,19 @@ export default function Create() {
           <input
             placeholder='Last Name'
             required
-            onChange={(event) => setLastName(event.target.value)}
+            type={"text"}
+            {...register("lastName", {
+              onChange: (event) => setLastName(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/,
+                message: "invalid Last Name",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.lastName && errors.lastName.message}
+          </div>
         </Form.Field>
 
         <Form.Field required>
@@ -72,8 +103,18 @@ export default function Create() {
             type={"tel"}
             placeholder='Phone Number'
             required
-            onChange={(event) => setPhone(event.target.value)}
+            {...register("phone", {
+              onChange: (event) => setPhone(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+                message: "invalid phone number",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.phone && errors.phone.message}
+          </div>
         </Form.Field>
 
         <Form.Field required>
@@ -82,8 +123,18 @@ export default function Create() {
             type={"email"}
             placeholder='Email'
             required
-            onChange={(event) => setMail(event.target.value)}
+            {...register("email", {
+              onChange: (event) => setMail(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.email && errors.email.message}
+          </div>
         </Form.Field>
 
         <Form.Field>
@@ -94,7 +145,11 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Button type='submit' className='blue-text' onClick={postData}>
+        <Button
+          type='submit'
+          className='blue-text'
+          onClick={handleSubmit(postData)}
+        >
           Submit
         </Button>
       </Form>

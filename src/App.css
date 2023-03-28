@@ -87,6 +87,10 @@ h3.roadmap-title {
   padding-bottom: 2em;
 }
 
+.error-message {
+  color: red;
+}
+
 @media screen and (max-width: 450px) {
   .flex-menu-container {
     flex-direction: column;

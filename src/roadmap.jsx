@@ -1,4 +1,4 @@
-import { List } from 'semantic-ui-react';
+import { List } from "semantic-ui-react";
 
 const Roadmap = () => (
   <List className='roadmap-list'>
@@ -17,8 +17,8 @@ const Roadmap = () => (
       <List.Content className='line-through'>Improve tables view</List.Content>
     </List.Item>
     <List.Item className='pl-2'>
-      <List.Icon name='edit' color='blue' />
-      <List.Content>Improve responsive</List.Content>
+      <List.Icon name='check' color='green' />
+      <List.Content className='line-through'>Improve responsive</List.Content>
     </List.Item>
     <List.Item className='list-headline'>
       <List.Icon name='check' color='green' />
@@ -39,12 +39,12 @@ const Roadmap = () => (
       <List.Content className='line-through'>Add Address field</List.Content>
     </List.Item>
     <List.Item className='pl-2'>
-      <List.Icon name='edit' color='blue' />
-      <List.Content>Add Search feature on tables</List.Content>
+      <List.Icon name='check' color='green' />
+      <List.Content className='line-through'>Add Form Validation</List.Content>
     </List.Item>
     <List.Item className='pl-2'>
       <List.Icon name='edit' color='blue' />
-      <List.Content>Add Form Validation</List.Content>
+      <List.Content>Add Search feature on tables</List.Content>
     </List.Item>
   </List>
 );

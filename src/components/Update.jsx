@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Icon } from "semantic-ui-react";
 import { APICall } from "../api";
@@ -10,6 +11,13 @@ export default function Update() {
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+
+  // from React Hook form | needed to validate the form
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   let navigate = useNavigate();
 
@@ -36,80 +44,124 @@ export default function Update() {
 
   return (
     <>
-      <div className="flex-menu-container">
-        <div className="read-button-container">
-          <Link to="/read">
-            <Button className="blue-text">
-              Read <Icon className="eye-icon" name="eye" />
+      <div className='flex-menu-container'>
+        <div className='read-button-container'>
+          <Link to='/read'>
+            <Button className='blue-text'>
+              Read <Icon className='eye-icon' name='eye' />
             </Button>
           </Link>
         </div>
 
-        <div className="homepage-button-container">
-          <Link to="/">
-            <Button className="blue-text">
-              Home <Icon className="arrow-icon" name="arrow left" />
+        <div className='homepage-button-container'>
+          <Link to='/'>
+            <Button className='blue-text'>
+              Home <Icon className='arrow-icon' name='arrow left' />
             </Button>
           </Link>
         </div>
       </div>
 
-      <Form className="create-form">
+      <Form className='create-form'>
         <Form.Field required>
           <label>First Name</label>
           <input
-            placeholder="First Name"
+            placeholder='First Name'
             required
             value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-          />{" "}
-          {/* l'oggetto event che passiamo alla funzione contiene tutte le informazioni riguardo l'evento di input, event.target restituisce l'elemento che ha triggerato l'evento, event.target.value restituisce il valore di quell'elemento */}
+            {...register("firstName", {
+              onChange: (event) => setFirstName(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/,
+                message: "invalid First Name",
+              },
+            })}
+          />
+          <div className='error-message'>
+            {errors.firstName && errors.firstName.message}
+          </div>
+          {/* the event object we pass to the function contains all the information about the input event, event.target returns the element that triggered the event, event.target.value returns the value of that element */}
         </Form.Field>
 
         <Form.Field required>
           <label>Last Name</label>
           <input
-            placeholder="Last Name"
+            placeholder='Last Name'
             required
             value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
+            {...register("lastName", {
+              onChange: (event) => setLastName(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/,
+                message: "invalid Last Name",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.lastName && errors.lastName.message}
+          </div>
         </Form.Field>
 
         <Form.Field required>
           <label>Phone Number</label>
           <input
             type={"tel"}
-            placeholder="Phone Number"
+            placeholder='Phone Number'
             required
             value={phone}
-            onChange={(event) => setPhone(event.target.value)}
+            {...register("phone", {
+              onChange: (event) => setPhone(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+                message: "invalid phone number",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.phone && errors.phone.message}
+          </div>
         </Form.Field>
 
         <Form.Field required>
           <label>Email</label>
           <input
             type={"email"}
-            placeholder="Email"
+            placeholder='Email'
             required
             value={mail}
-            onChange={(event) => setMail(event.target.value)}
+            {...register("email", {
+              onChange: (event) => setMail(event.target.value),
+              required: "Required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address",
+              },
+            })}
           />
+          <div className='error-message'>
+            {errors.email && errors.email.message}
+          </div>
         </Form.Field>
 
         <Form.Field>
           <label>Address</label>
           <input
-            placeholder="Address"
+            placeholder='Address'
             value={address}
             onChange={(event) => setAddress(event.target.value)}
           />
         </Form.Field>
 
-        <Button type="submit" onClick={updateAPIData} className="blue-text">
+        <Button
+          type='submit'
+          onClick={handleSubmit(updateAPIData)}
+          className='blue-text'
+        >
           Update
-          <Icon className="plus-icon" name="pencil" />
+          <Icon className='plus-icon' name='pencil' />
         </Button>
       </Form>
     </>
