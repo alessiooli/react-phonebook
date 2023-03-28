@@ -8,6 +8,8 @@ A React Phonebook application where you can perform real time CRUD operations on
 - Mockapi.io
 - Semantic UI React
 - Axios
+- React Router Dom
+- React Hook Form
 
 ## Link
 
