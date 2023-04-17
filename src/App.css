@@ -91,6 +91,16 @@ h3.roadmap-title {
   color: red;
 }
 
+i.computer.icon.computer-icon {
+  padding-right: 1.5em;
+}
+
+.credits-container {
+  padding: 2em 2em;
+  padding-bottom: 8em;
+  text-align: center;
+}
+
 @media screen and (max-width: 450px) {
   .flex-menu-container {
     flex-direction: column;
